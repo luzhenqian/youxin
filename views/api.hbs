@@ -5,35 +5,75 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge' />
   <meta name='viewport' content='width=device-width, initial-scale=1.0' />
   <title>App</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <link rel='stylesheet' href='bootstrap/css/bootstrap.min.css' />
   <script src='bootstrap/js/bootstrap.min.js'></script>
 </head>
 
 <body>
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createServiceModal">
-    创建服务
-  </button>
+  <div class="container">
 
-  <div class="modal fade" id="createServiceModal" tabindex="-1" aria-labelledby="createServiceModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="createServiceModalLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProjectModal">
+      创建项目
+    </button>
+
+    <div class="modal fade" id="createProjectModal" tabindex="-1" aria-labelledby="createProjectModalLabel"
+      aria-hidden="true">
+      <form class="needs-validation" target="_self" novalidate>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="createProjectModalLabel">创建项目</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="projectName" class="form-label">项目名称</label>
+                <input type="text" class="form-control" id="projectName" required>
+                <div class="invalid-feedback">
+                  请输入项目名称
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="projectDesc" class="form-label">项目描述</label>
+                <textarea class="form-control" id="projectDesc" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+              <button type="submit" class="btn btn-primary">创建</button>
+            </div>
+          </div>
         </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
-
   <script>
+    (function () {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            event.preventDefault()
+            event.stopPropagation()
+            if (!form.checkValidity()) {
+              form.classList.add('was-validated')
+              return
+            }
+            createProject()
+          }, false)
+        })
+    })()
+
+    // TODO: 前后端分离
+    function createProject() {
+      // axios()
+    }
   </script>
 </body>
 
